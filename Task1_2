@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+DATA_DIR="/home/daria/st/d"
+
+jq -r '.friends[]| {name, id:.id, knows:.knows[]}|[.id,.name,.knows]|@csv' "$DATA_DIR/friends.json" | awk -f './graph.awk' 
+> "$DATA_DIR/relations.dot" && dot -Tsvg -Kdot -o "$DATA_DIR/relations.svg" "$DATA_DIR/relations.dot" 
+&& gwenview "$DATA_DIR/relations.svg"
+
+
