@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+
+DATA_DIR='/home/daria/st/itm/d'
+
+curl http://data.gov.ru/sites/default/files/opendata/7107542055-ioszpro/data-2015-03-11T00-00-00-structure-2015-03-11T00-00-00.csv > file1.csv
+
+curl https://www.huduser.gov/portal/datasets/hads/hads2013n_ASCII.zip > file2.zip
+
+unzip file2.zip
+
+echo 1.1.3. 10 last_lines of l1.log
+
+tail "$DATA_DIR/l1.log"
+
+echo 1.1.4. 5 first_lines of l1.log
+
+head "$DATA_DIR/l1.log"
+
+echo 1.1.5. divide the log_file by 4_files
+
+mkdir -p $DATA_DIR/log/l1 
+
+NEW_DIR='/home/daria/st/itm/d/log/l1'
+
+split -n4 "$DATA_DIR/l1.log" | mv x* $NEW_DIR
+
+echo 1.1.6. count words in_log_file
+
+wc -w "$DATA_DIR/l1.log"
+
+echo 1.1.7. count lines in_log_file
+
+wc -l "$DATA_DIR/l1.log"
+
+echo 1.1.8. build a tree in_the dot_format
+
+cat "$DATA_DIR/tre.csv" | awk -f './csv-to-tree.awk' > "$DATA_DIR/tre.dot"
+
+echo 1.1.9. dot_and_eog
+
+cat "$DATA_DIR/tre.csv" | awk -f './csv-to-tree.awk' > "$DATA_DIR/tre.dot" && dot -Tsvg -Kdot -o "$DATA_DIR/tre.svg" "$DATA_DIR/tre.dot" && eog "$DATA_DIR/tre.svg"
