@@ -1,0 +1,47 @@
+1. Create Collection. 
+db.myCollection.insert({
+			'university': 'NSU', 
+			'department': 'MMF', 
+			'course': 'ST'
+			})
+
+2. Inserting Data. 
+db.myCollection.insertOne({
+			'university': 'NSU', 
+			'department': 'MMF', 
+			'course': 'NLP'
+			'students': 30
+			})
+
+db.myCollection.insertMany([{
+			'university': 'NSU', 
+			'department': 'MMF', 
+			'course': 'SA',
+			'students': 15
+			},
+			{
+			'university': 'NSU', 
+			'department': 'MMF', 
+			'course': 'DL',
+			'students': 45
+			},
+			{
+			'university': 'NSU', 
+			'department': 'EF', 
+			'course': 'SA',
+			'students': 20
+			}])
+3. Querying Data
+db.myCollection.find({'course': 'SA'})
+db.myCollection.find({'course': 'SA', $or: {'students': {$lt: 25}})
+db.myCollection.find({'university': 'NSU', 'department': 'EF'})
+
+4. Updating Data
+db.myCollection.updateOne(
+			{'course': 'ST'},
+			{$set: {'students': 28}})
+
+5. Replace Data
+db.myCollection.replaceOne(
+			{'department': 'EF', 'course': 'SA'},
+			{'department': 'MMF', 'course': 'SA'})
