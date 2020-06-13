@@ -1,0 +1,29 @@
+CREATE VERTEX University SET name = 'HSE'
+CREATE VERTEX Department SET name = 'MMF'
+CREATE VERTEX Department SET name = 'EF'
+CREATE VERTEX Master_program SET name = 'BDA&AI'
+CREATE VERTEX Master_program SET name = 'Data Science'
+CREATE VERTEX Course SET name = 'Machine Learning'
+CREATE VERTEX Course SET name = 'NLP'
+CREATE VERTEX Course SET name = 'System Analysis'
+CREATE VERTEX Course SET name = 'Deep Learning'
+CREATE VERTEX Student SET name = 'Kate'
+CREATE VERTEX Student SET name = 'Pavel'
+CREATE VERTEX Student SET name = 'Alice'
+
+CREATE EDGE Include FROM (SELECT FROM University WHERE name = 'NSU') TO (SELECT FROM Department WHERE name = 'MMF')
+CREATE EDGE Include FROM (SELECT FROM University WHERE name = 'HSE') TO (SELECT FROM Department WHERE name = 'EF')
+CREATE EDGE Include FROM (SELECT FROM Department WHERE name = 'MMF') TO (SELECT FROM Master_program WHERE name = 'BDA&AI')
+CREATE EDGE Include FROM (SELECT FROM Department WHERE name = 'EF') TO (SELECT FROM Master_program WHERE name = 'Data Science')
+CREATE EDGE Include FROM (SELECT FROM Master_program WHERE name = 'BDA&AI') TO (SELECT FROM Course WHERE name = 'Machine Learning')
+CREATE EDGE Include FROM (SELECT FROM Master_program WHERE name = 'BDA&AI') TO (SELECT FROM Course WHERE name = 'Deep Learning')
+CREATE EDGE Include FROM (SELECT FROM Master_program WHERE name = 'Data Science') TO (SELECT FROM Course WHERE name = 'System Analysis')
+CREATE EDGE Include FROM (SELECT FROM Master_program WHERE name = 'Data Science') TO (SELECT FROM Course WHERE name = 'NLP')
+CREATE EDGE Study_in FROM (SELECT FROM Student WHERE name = 'Kate') TO (SELECT FROM Master_program WHERE name = 'BDA&AI')
+CREATE EDGE Study_in FROM (SELECT FROM Student WHERE name = 'Pavel') TO (SELECT FROM Master_program WHERE name = 'BDA&AI')
+CREATE EDGE Study_in FROM (SELECT FROM Student WHERE name = 'Alice') TO (SELECT FROM Master_program WHERE name = 'Data Science')
+CREATE EDGE Select FROM (SELECT FROM Student WHERE name = 'Kate') TO (SELECT FROM Course WHERE name = 'Machine Learning')
+CREATE EDGE Select FROM (SELECT FROM Student WHERE name = 'Kate') TO (SELECT FROM Course WHERE name = 'Deep Learning')
+CREATE EDGE Select FROM (SELECT FROM Student WHERE name = 'Pavel') TO (SELECT FROM Course WHERE name = 'Deep Learning')
+CREATE EDGE Select FROM (SELECT FROM Student WHERE name = 'Alice') TO (SELECT FROM Course WHERE name = 'System Analysis')
+CREATE EDGE Select FROM (SELECT FROM Student WHERE name = 'Alice') TO (SELECT FROM Course WHERE name = 'NLP')
