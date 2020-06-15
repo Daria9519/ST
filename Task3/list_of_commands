@@ -1,0 +1,47 @@
+set 1 Ivan
+set 2 Kirill
+get 1
+get 2
+
+mset user:Ivan:email 'org@mail.ru' user:Ivan:phonenumber '666'
+mget user:Ivan:email
+
+hmset user:Kirill email 'kir89@mail.ru' phonenumber '777'
+hmget user:Kirill email 
+hvals user:Kirill
+hdel user:Kirill
+hkeys user:Kirill
+hmset user:Kirill salary '55'
+hincrby user:Kirill salary 1
+hincrby user:Kirill salary -1
+hlen user:Kirill
+
+rpush Kirill:tasks trip meetint event
+llen Kirill:tasks
+lrange Kirill:tasks 0 -1
+lrem Kirill:tasks 1 meeting
+lpop Kirill:tasks
+rpoplpush Kirill:tasks othertask
+
+sadd Irina:tasks aet sleep play work
+sadd Marina:tasks plan shopping sleep work
+sinter Irina:tasks Marina:tasks
+sdiff Irina:tasks Marina:tasks
+sunion Irina:tasks Marina:tasks
+sinterstore task1 Irina:tasks Marina:tasks
+smembers task1
+sdiffstore task2 Irina:tasks Marina:tasks
+smembers task2
+smove Irina:tasks Marina:tasks 'play'
+scard Irina:tasks
+spop Irina:tasks
+srem Irina:tasks 'work'
+
+set mytask "Hello world"
+expire mytask 10
+exists mytask
+setex mytask 10 "Hello world"
+ttl mytask
+persist mytask
+expireat mytask
+exists mytask
